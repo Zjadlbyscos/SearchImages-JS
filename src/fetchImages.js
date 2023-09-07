@@ -1,11 +1,11 @@
-import axios from 'axios';
-const URL_API = 'https://pixabay.com/api/';
-const KEY_API = '39267402-49695b078cc30e5676dab55fe';
-const PER_PAGE = 20;
-let currentPage = 1;
+// import axios from 'axios';
+// const URL_API = 'https://pixabay.com/api/';
+// const KEY_API = '39267402-49695b078cc30e5676dab55fe';
+// const PER_PAGE = 20;
+// let currentPage = 1;
 
 // const fetchNewImages = async (searchValue) => {
-//     let arrGallery = '';
+  
 //     let params = ({
 //       key:KEY_API,
 //       q: searchValue,
@@ -26,7 +26,7 @@ let currentPage = 1;
 //         );
 //         return;
 //       }
-//       arrGallery = imagesArray
+//      const arrGallery = imagesArray
 //         .map(image => {
 //           return `
 //           <div class="photo-card">
@@ -60,4 +60,4 @@ let currentPage = 1;
 //       console.log(error);
 //     }
 //   };
-export {fetchNewImages};
+// export {fetchNewImages};
