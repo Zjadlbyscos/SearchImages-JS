@@ -1,14 +1,12 @@
-//to najlepiej jak dotąd 
+
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const searchForm = document.querySelector('.search-form');
-const searchBtn = document.querySelector("[type='submit']");
 const gallery = document.querySelector('.gallery');
 const loadBtn = document.querySelector('.load-more');
-const footer = document.querySelector('.footer');
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
@@ -17,7 +15,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 const PIXIBAY_URL = 'https://pixabay.com/api/';
 const KEY_PIXI = '39267402-49695b078cc30e5676dab55fe';
-const PER_PAGE = 40;
+const PER_PAGE = 50;
 let currentPage = 1;
 
 searchForm.addEventListener('input', (event) => {
@@ -47,12 +45,14 @@ async function loadMore() {
   currentPage++;
 
   try {
-    const response = await fetchImages(searchValue, currentPage);
-    if (response === null) {
+    const loadMoreMarkup = await fetchImages(searchValue, currentPage);
+    if (loadMoreMarkup === null) {
      // footer.style.display = 'none';
       loadBtn.style.display = 'none';
       Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+      return;
     }
+    gallery.innerHTML += loadMoreMarkup; // Dodajemy nowe zdjęcia do istniejącej zawartości galerii
   } catch (error) {
     console.log(error);
   }
