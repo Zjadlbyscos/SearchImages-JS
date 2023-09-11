@@ -1,4 +1,5 @@
 import { fetchImages } from './fetchImages';
+import { smoothScrollToNextGroup } from './smoothScrl';
 import Notiflix from 'notiflix';
 //import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import SimpleLightbox from 'simplelightbox';
@@ -29,7 +30,11 @@ async function handleSearch(event) {
   const searchValue = event.target.searchQuery.value.trim();
 
   if (searchValue === '') {
-    Notiflix.Notify.info('Please enter a search query.');
+    Notiflix.Notify.info('Please enter a search query.',{
+      timeout: 3 * 1000,
+      position: 'center-center',
+    });
+    Notiflix.Loading.remove();
     return;
   }
 
@@ -48,9 +53,12 @@ async function loadMore() {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
+      Notiflix.Loading.remove();
       return;
     }
-    gallery.innerHTML += loadMoreMarkup; // Dodajemy nowe zdjęcia do istniejącej zawartości galerii
+    gallery.innerHTML += loadMoreMarkup;
+    smoothScrollToNextGroup();
+
   } catch (error) {
     console.log(error);
   }
@@ -61,6 +69,9 @@ async function fetchAndDisplayImages(searchValue, currentPage) {
     const imagesMarkup = await fetchImages(searchValue, currentPage);
     gallery.innerHTML = imagesMarkup;
     loadBtn.style.display = 'block';
+    setTimeout(() => {
+      smoothScrollToNextGroup();
+    }, 0);
   } catch (error) {
     console.log(error);
   }

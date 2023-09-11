@@ -23,8 +23,15 @@ async function fetchImages(searchValue, currentPage) {
       if (imagesArray.length === 0) {
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
-        );
+        ,
+        
+        {
+            timeout: 3 * 1000,
+      position: 'center-center'   
+        });
+        Notiflix.Loading.remove();
         return null;
+       
       }
   
       markupGallery = imagesArray
