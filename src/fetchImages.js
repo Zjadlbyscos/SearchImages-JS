@@ -2,7 +2,7 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 const PIX_URL = 'https://pixabay.com/api/';
 const KEY_PIX = '39267402-49695b078cc30e5676dab55fe';
-const PER_PAGE = 10;
+const PER_PAGE = 40;
 
 
 async function fetchImages(searchValue, currentPage) {
