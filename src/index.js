@@ -1,5 +1,6 @@
 import { fetchImages } from './fetchImages';
 import Notiflix from 'notiflix';
+//import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
@@ -24,6 +25,7 @@ loadBtn.addEventListener('click', loadMore);
 
 async function handleSearch(event) {
   event.preventDefault();
+  Notiflix.Loading.circle('Loading data, please wait...');
   const searchValue = event.target.searchQuery.value.trim();
 
   if (searchValue === '') {

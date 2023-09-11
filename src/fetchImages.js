@@ -56,6 +56,7 @@ async function fetchImages(searchValue, currentPage) {
         `;
         })
         .join('');
+        Notiflix.Loading.remove();
   
       return markupGallery;
     } catch (error) {
